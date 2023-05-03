@@ -1,6 +1,6 @@
 import Image from "next/image";
 import sun from "../public/assets/icon-sun.svg";
-import Input from "@/components/Input";
+import Input from "@/src/components/Input";
 
 export default function Home() {
   return (

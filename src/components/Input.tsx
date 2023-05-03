@@ -7,7 +7,9 @@ const Input = () => {
     e.preventDefault();
   };
 
-  const setTodoHandler: ChangeEventHandler<HTMLInputElement> = (event) => {
+  const setTodoChangeHandler: ChangeEventHandler<HTMLInputElement> = (
+    event
+  ) => {
     setTodo(event.target.value);
   };
 
@@ -19,7 +21,7 @@ const Input = () => {
         placeholder="Create a new todo..."
         className="m-auto block w-full rounded-md bg-Very-Dark-Desaturated-Blue px-4 py-3 text-white outline-none"
         value={todo}
-        onChange={setTodoHandler}
+        onChange={setTodoChangeHandler}
       />
     </form>
   );

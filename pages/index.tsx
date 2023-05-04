@@ -1,6 +1,7 @@
 import Image from "next/image";
 import sun from "../public/assets/icon-sun.svg";
 import Input from "@/src/components/Input";
+import TodoList from "@/src/components/TodoList";
 
 export default function Home() {
   return (
@@ -13,6 +14,9 @@ export default function Home() {
           <Image src={sun} alt="bg-hero" />
         </div>
         <Input />
+      </div>
+      <div>
+        <TodoList />
       </div>
     </main>
   );

@@ -1,10 +1,17 @@
 import React, { ChangeEventHandler, useState } from "react";
+import { useDispatch } from "react-redux";
+
+import { InputAction } from "../store/input-slice";
 
 const Input = () => {
   const [todo, setTodo] = useState("");
 
+  const dispatch = useDispatch();
+
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setTodo("");
+    dispatch(InputAction.submitHandler({ id: Math.random(), title: todo }));
   };
 
   const setTodoChangeHandler: ChangeEventHandler<HTMLInputElement> = (

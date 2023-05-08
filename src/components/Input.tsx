@@ -11,7 +11,8 @@ const Input = () => {
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setTodo("");
-    dispatch(InputAction.submitHandler({ id: Math.random(), title: todo }));
+    const newItem = { id: Date.now().toString(), title: todo };
+    dispatch(InputAction.submitHandler(newItem));
   };
 
   const setTodoChangeHandler: ChangeEventHandler<HTMLInputElement> = (

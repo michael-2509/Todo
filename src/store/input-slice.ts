@@ -44,6 +44,18 @@ const InputSlice = createSlice({
     setFilterType(state, action: SubmitAction) {
       state.filter = action.payload;
     },
+    //to reorder the states
+    reorderHandler(state, action) {
+      // Get the drag index and hover index from the action payload
+      const { dragIndex, hoverIndex } = action.payload;
+      // Get the dragged item and the hovered item from the state.todoData array
+      const draggedItem = state.todoData[dragIndex];
+      const hoveredItem = state.todoData[hoverIndex];
+      // Swap their positions in the state.todoData array
+      state.todoData[dragIndex] = hoveredItem;
+      state.todoData[hoverIndex] = draggedItem;
+      console.log("for reordering Handler");
+    },
   },
 });
 

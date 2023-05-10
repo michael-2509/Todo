@@ -4,7 +4,6 @@ import { RootState } from "../store";
 import { InputAction } from "../store/input-slice";
 import Category from "./category";
 import { useFilteredTodoData } from "../helper";
-import { filter } from "minimatch";
 
 const TodoList = () => {
   const dispatch = useDispatch();

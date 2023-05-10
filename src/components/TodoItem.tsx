@@ -31,19 +31,24 @@ const TodoItem = ({ id, title, completed }: TodoItemProps) => {
 
   // Define a type constant for your draggable items
   const type = "todo";
+
   // Use the useDrag hook to make each todo item draggable
   const [{ isDragging }, drag] = useDrag(() => ({
     // Specify the type of the drag source
     type,
-    // Specify the item data
+
+    // describes the item being drag
     item: { id, title, completed },
-    // Specify some event handlers
+
+    // a function that is called when the drag operation end
     end: (item, monitor) => {
       const dropResult = monitor.getDropResult();
       if (item && dropResult) {
         console.log(`You dropped ${item.title} into ${dropResult}!`);
       }
     },
+
+    // a function that returns a property that is used in any component to track the state of the drag source
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
@@ -52,44 +57,22 @@ const TodoItem = ({ id, title, completed }: TodoItemProps) => {
   const [{ isOver }, drop] = useDrop(() => ({
     // Specify the accepted types of the drop target
     accept: type,
-    // Specify some event handlers
+
+    // A function that is called when an item is dropped on a target
     drop: () => ({ name: title }),
+
+    //A function that is called when an item is dropped on a target
     hover: (item: TodoItemProps, monitor) => {
       if (!ref.current) {
         return;
       }
+
       const dragIndex = data.findIndex((todo) => todo.id === item.id);
       const hoverIndex = data.findIndex((todo) => todo.id === id);
+      console.log(dragIndex, hoverIndex);
 
       // Don't replace items with themselves
       if (dragIndex === hoverIndex) {
-        return;
-      }
-
-      // Determine rectangle on screen
-      const hoverBoundingRect = ref.current?.getBoundingClientRect();
-
-      // Get vertical middle
-      const hoverMiddleY =
-        (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
-
-      // Determine mouse position
-      const clientOffset = monitor.getClientOffset();
-
-      // Get pixels to the top
-      const hoverClientY = (clientOffset?.y ?? 0) - hoverBoundingRect.top;
-
-      // Only perform the move when the mouse has crossed half of the items height
-      // When dragging downwards, only move when the cursor is below 50%
-      // When dragging upwards, only move when the cursor is above 50%
-
-      // Dragging downwards
-      if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
-        return;
-      }
-
-      // Dragging upwards
-      if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
         return;
       }
 
@@ -101,12 +84,16 @@ const TodoItem = ({ id, title, completed }: TodoItemProps) => {
       // but it's good here for performance reasons
       // to avoid expensive index searches.
       // item.index = hoverIndex;
+
+      dragIndex == hoverIndex;
     },
+    //function that return an object property that is passed to our component  to track the state of a drop target
     collect: (monitor) => ({
       isOver: monitor.isOver(),
     }),
   }));
 
+  // connector function that is used to  achieve drag or drop operation on a component
   drag(ref);
   drop(ref);
   return (

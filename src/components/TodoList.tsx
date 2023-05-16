@@ -9,6 +9,7 @@ const TodoList = () => {
   const dispatch = useDispatch();
   const data = useSelector((state: RootState) => state.inputReducer.todoData);
   const filteredData = useFilteredTodoData(data);
+  console.log(JSON.stringify(filteredData));
 
   const clearCompletedHandler = () => {
     dispatch(InputAction.clearCompletedHandler());

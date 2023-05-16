@@ -47,20 +47,20 @@ const InputSlice = createSlice({
     //to reorder the states
     reorderHandler(state, action) {
       console.log(JSON.parse(JSON.stringify(state.todoData)));
+
       // Get the drag index and hover index from the action payload
       const { dragIndex, hoverIndex } = action.payload;
 
       // Create a new array by moving the dragged item to the desired position
       const updatedTodoData = [...state.todoData];
       const [draggedItem] = updatedTodoData.splice(dragIndex, 1);
+      console.log(JSON.parse(JSON.stringify(draggedItem)));
       updatedTodoData.splice(hoverIndex, 0, draggedItem);
-
+      console.log(updatedTodoData);
       // Update the state with the new todoData array
       state.todoData = updatedTodoData;
-
-      // Recalculate the indexes for all todo items
-      // Update the state with the new todoData array
-      state.todoData = updatedTodoData;
+      console.log(state.todoData);
+      console.log(dragIndex, hoverIndex);
     },
   },
 });
